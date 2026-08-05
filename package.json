@@ -1,0 +1,19 @@
+{
+  "name": "playwrightframework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {  
+    "sanity": "npx playwright test --grep \"@sanity\" --project=chromium",
+    "regression": "npx playwright test --grep \"@regression\" --project=chromium"},
+
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.62.0",
+    "@types/node": "^26.1.2",
+    "allure-playwright": "^3.10.2"
+  }
+}
