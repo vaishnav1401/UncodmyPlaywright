@@ -7,6 +7,6 @@ test('Open Account', async({page})=>{
 
     expect(page.url()).toContain('parabank');
 
-console.log('Open Account Test Case Completed');
+
 
 });
