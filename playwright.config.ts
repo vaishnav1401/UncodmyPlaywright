@@ -20,19 +20,15 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
-  //workers: 1,
-
+//  workers: process.env.CI ? 1 : undefined,
+ // workers:1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  //reporter: 'html',
-  reporter: [['html'],
-  ['dot'],
-  ['line'],
-  ['list'],
-  ['allure-playwright', { outputFolder: 'allure-results' }]
-  ],
-
-
+  reporter:[['html'],
+             ['dot'],
+             ['line'],
+             ['list'],
+            ['allure-playwright',{outputfolder:'allure-results'}]
+],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
@@ -43,21 +39,51 @@ export default defineConfig({
   },
 
   /* Configure projects for major browsers */
-  projects: [
+   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name:'chrome',
+       use:
+    {
+      browserName: 'chromium',
+      headless:false,
+      screenshot:'on',
+     trace:'on',
+     video:'on',
+    // viewport:{width:1080,height:720},
+    //...devices['Desktop Chrome'],
+   ...devices['Galaxy A55'],
+   // ...devices['Galaxy S III landscape'],
+    ignoreHTTPSErrors:true,
+   permissions:['geolocation']
+     
+
+    },
+    },
+   
+
+  {
+      name:'firefox',
+       use:
+    {
+      browserName: 'firefox',
+      headless:true,
+      screenshot:'only-on-failure',
+     trace:'retain-on-failure',
+     video:'retain-on-failure'
+    },
     },
 
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-
+      name:'safari',
+       use:
     {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      browserName: 'webkit',
+      headless:true,
+      screenshot:'only-on-failure',
+     trace:'retain-on-failure',
+     video:'retain-on-failure'
     },
+  }
 
     /* Test against mobile viewports. */
     // {
